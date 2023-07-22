@@ -79,7 +79,6 @@ private:
     QHBoxLayout *layout_main;
     QDoubleValidator *floatValidator;
     QTextEdit *Logger;
-    QThread *sleeptime;
     QHBoxLayout *layoutPort;
     QSerialPort *serialPort;
 
