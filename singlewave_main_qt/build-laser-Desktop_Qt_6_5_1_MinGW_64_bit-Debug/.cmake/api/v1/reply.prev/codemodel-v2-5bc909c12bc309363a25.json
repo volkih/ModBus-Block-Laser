@@ -1,0 +1,79 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-0da979f88bba2bf0e760.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "laser",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "laser::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-laser-Debug-ba041c5ad0386f6d0cc4.json",
+					"name" : "laser",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "laser_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-laser_autogen-Debug-522c9e087b1d289aaa1b.json",
+					"name" : "laser_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "laser_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-laser_autogen_timestamp_deps-Debug-ee28ec04df7251733096.json",
+					"name" : "laser_autogen_timestamp_deps",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "D:/GitHub/ModBus-Block-Laser/singlewave_main_qt/build-laser-Desktop_Qt_6_5_1_MinGW_64_bit-Debug",
+		"source" : "D:/GitHub/ModBus-Block-Laser/singlewave_main_qt/laser"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 4
+	}
+}

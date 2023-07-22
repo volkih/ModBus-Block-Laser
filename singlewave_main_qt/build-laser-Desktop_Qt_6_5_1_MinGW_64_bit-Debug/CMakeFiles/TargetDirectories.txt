@@ -1,0 +1,9 @@
+D:/GitHub/ModBus-Block-Laser/singlewave_main_qt/build-laser-Desktop_Qt_6_5_1_MinGW_64_bit-Debug/CMakeFiles/laser.dir
+D:/GitHub/ModBus-Block-Laser/singlewave_main_qt/build-laser-Desktop_Qt_6_5_1_MinGW_64_bit-Debug/CMakeFiles/edit_cache.dir
+D:/GitHub/ModBus-Block-Laser/singlewave_main_qt/build-laser-Desktop_Qt_6_5_1_MinGW_64_bit-Debug/CMakeFiles/rebuild_cache.dir
+D:/GitHub/ModBus-Block-Laser/singlewave_main_qt/build-laser-Desktop_Qt_6_5_1_MinGW_64_bit-Debug/CMakeFiles/list_install_components.dir
+D:/GitHub/ModBus-Block-Laser/singlewave_main_qt/build-laser-Desktop_Qt_6_5_1_MinGW_64_bit-Debug/CMakeFiles/install.dir
+D:/GitHub/ModBus-Block-Laser/singlewave_main_qt/build-laser-Desktop_Qt_6_5_1_MinGW_64_bit-Debug/CMakeFiles/install/local.dir
+D:/GitHub/ModBus-Block-Laser/singlewave_main_qt/build-laser-Desktop_Qt_6_5_1_MinGW_64_bit-Debug/CMakeFiles/install/strip.dir
+D:/GitHub/ModBus-Block-Laser/singlewave_main_qt/build-laser-Desktop_Qt_6_5_1_MinGW_64_bit-Debug/CMakeFiles/laser_autogen_timestamp_deps.dir
+D:/GitHub/ModBus-Block-Laser/singlewave_main_qt/build-laser-Desktop_Qt_6_5_1_MinGW_64_bit-Debug/CMakeFiles/laser_autogen.dir
