@@ -343,7 +343,6 @@ void Widget::stopGenerateBlock()
 void Widget::readSerialData()
 {
       QString data = "";
-      QThread::sleep(100);
 
       if(serialPort->isOpen()){
         // Получаем данные через последовательный порт
