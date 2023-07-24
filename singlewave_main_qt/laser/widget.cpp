@@ -44,7 +44,6 @@ Widget::Widget(QWidget *parent)
     closePortButton = new QPushButton("Закрыть порт");
 
     Logger = new QTextEdit;
-    sleeptime = new QThread;
 
     //Объявление свойств объектов
 
@@ -286,7 +285,7 @@ void Widget::DataPort(float FinalDuration, float FinalPeriod, float NumberOfPuls
         serialPort->waitForBytesWritten(-1);
       }
       else{
-        QMessageBox::warning(this,"Error","Port is not open!")
+        QMessageBox::warning(this,"Error","Port is not open!");
       }
 
 }
@@ -300,7 +299,7 @@ void Widget::UpBlock()
         readSerialData();
       }
       else{
-        QMessageBox::warning(this,"Error","Port is not open!")
+        QMessageBox::warning(this,"Error","Port is not open!");
       }
 }
 
@@ -312,7 +311,7 @@ void Widget::DownBlock()
         serialPort->waitForBytesWritten(-1);
       }
       else{
-        QMessageBox::warning(this,"Error","Port is not open!")
+        QMessageBox::warning(this,"Error","Port is not open!");
       }
 
 }
@@ -325,7 +324,7 @@ void Widget::startGenerateBlock()
         serialPort->waitForBytesWritten(-1);
       }
       else{
-        QMessageBox::warning(this,"Error","Port is not open!")
+        QMessageBox::warning(this,"Error","Port is not open!");
       }
 }
 
@@ -337,7 +336,7 @@ void Widget::stopGenerateBlock()
         serialPort->waitForBytesWritten(-1);
       }
       else{
-        QMessageBox::warning(this,"Error","Port is not open!")
+        QMessageBox::warning(this,"Error","Port is not open!");
       }
 }
 
@@ -355,7 +354,7 @@ void Widget::readSerialData()
         }
       }
       else{
-        QMessageBox::warning(this,"Error","Port is not open!")
+        QMessageBox::warning(this,"Error","Port is not open!");
       }
 }
 
