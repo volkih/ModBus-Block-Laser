@@ -63,17 +63,12 @@ static constexpr auto qt_meta_stringdata_CLASSWidgetENDCLASS = QtMocHelpers::str
     "s",
     "from",
     "to",
-    "UpBlock",
-    "DownBlock",
-    "startGenerateBlock",
-    "stopGenerateBlock",
     "readSerialData",
-    "openSerialPort",
-    "closeSerialport"
+    "setParameters"
 );
 #else  // !QT_MOC_HAS_STRING_DATA
 struct qt_meta_stringdata_CLASSWidgetENDCLASS_t {
-    uint offsetsAndSizes[62];
+    uint offsetsAndSizes[52];
     char stringdata0[7];
     char stringdata1[18];
     char stringdata2[1];
@@ -98,13 +93,8 @@ struct qt_meta_stringdata_CLASSWidgetENDCLASS_t {
     char stringdata21[2];
     char stringdata22[5];
     char stringdata23[3];
-    char stringdata24[8];
-    char stringdata25[10];
-    char stringdata26[19];
-    char stringdata27[18];
-    char stringdata28[15];
-    char stringdata29[15];
-    char stringdata30[16];
+    char stringdata24[15];
+    char stringdata25[14];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(sizeof(qt_meta_stringdata_CLASSWidgetENDCLASS_t::offsetsAndSizes) + ofs), len 
@@ -134,13 +124,8 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSWidgetENDCLASS_t qt_meta_string
         QT_MOC_LITERAL(183, 1),  // "s"
         QT_MOC_LITERAL(185, 4),  // "from"
         QT_MOC_LITERAL(190, 2),  // "to"
-        QT_MOC_LITERAL(193, 7),  // "UpBlock"
-        QT_MOC_LITERAL(201, 9),  // "DownBlock"
-        QT_MOC_LITERAL(211, 18),  // "startGenerateBlock"
-        QT_MOC_LITERAL(230, 17),  // "stopGenerateBlock"
-        QT_MOC_LITERAL(248, 14),  // "readSerialData"
-        QT_MOC_LITERAL(263, 14),  // "openSerialPort"
-        QT_MOC_LITERAL(278, 15)   // "closeSerialport"
+        QT_MOC_LITERAL(193, 14),  // "readSerialData"
+        QT_MOC_LITERAL(208, 13)   // "setParameters"
     },
     "Widget",
     "clickedStartBlock",
@@ -166,13 +151,8 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSWidgetENDCLASS_t qt_meta_string
     "s",
     "from",
     "to",
-    "UpBlock",
-    "DownBlock",
-    "startGenerateBlock",
-    "stopGenerateBlock",
     "readSerialData",
-    "openSerialPort",
-    "closeSerialport"
+    "setParameters"
 };
 #undef QT_MOC_LITERAL
 #endif // !QT_MOC_HAS_STRING_DATA
@@ -184,7 +164,7 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSWidgetENDCLASS[] = {
       11,       // revision
        0,       // classname
        0,    0, // classinfo
-      13,   14, // methods
+       8,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -192,19 +172,14 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSWidgetENDCLASS[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,   92,    2, 0x08,    1 /* Private */,
-       3,    0,   93,    2, 0x08,    2 /* Private */,
-       4,    9,   94,    2, 0x08,    3 /* Private */,
-      15,    3,  113,    2, 0x08,   13 /* Private */,
-      15,    2,  120,    2, 0x28,   17 /* Private | MethodCloned */,
-      19,    3,  125,    2, 0x08,   20 /* Private */,
-      24,    0,  132,    2, 0x08,   24 /* Private */,
-      25,    0,  133,    2, 0x08,   25 /* Private */,
-      26,    0,  134,    2, 0x08,   26 /* Private */,
-      27,    0,  135,    2, 0x08,   27 /* Private */,
-      28,    0,  136,    2, 0x08,   28 /* Private */,
-      29,    0,  137,    2, 0x08,   29 /* Private */,
-      30,    0,  138,    2, 0x08,   30 /* Private */,
+       1,    0,   62,    2, 0x08,    1 /* Private */,
+       3,    0,   63,    2, 0x08,    2 /* Private */,
+       4,    9,   64,    2, 0x08,    3 /* Private */,
+      15,    3,   83,    2, 0x08,   13 /* Private */,
+      15,    2,   90,    2, 0x28,   17 /* Private | MethodCloned */,
+      19,    3,   95,    2, 0x08,   20 /* Private */,
+      24,    0,  102,    2, 0x08,   24 /* Private */,
+      25,    0,  103,    2, 0x08,   25 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
@@ -213,11 +188,6 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSWidgetENDCLASS[] = {
     QMetaType::Void, QMetaType::Float, QMetaType::Float, QMetaType::Float,   16,   17,   18,
     QMetaType::Void, QMetaType::Float, QMetaType::Float,   16,   17,
     0x80000000 | 20, 0x80000000 | 20, QMetaType::Int, QMetaType::Int,   21,   22,   23,
-    QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
 
@@ -262,19 +232,9 @@ Q_CONSTINIT const QMetaObject Widget::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<char *, std::false_type>,
         QtPrivate::TypeAndForceComplete<int, std::false_type>,
         QtPrivate::TypeAndForceComplete<int, std::false_type>,
-        // method 'UpBlock'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'DownBlock'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'startGenerateBlock'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'stopGenerateBlock'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'readSerialData'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'openSerialPort'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'closeSerialport'
+        // method 'setParameters'
         QtPrivate::TypeAndForceComplete<void, std::false_type>
     >,
     nullptr
@@ -293,13 +253,8 @@ void Widget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
         case 4: _t->DataPort((*reinterpret_cast< std::add_pointer_t<float>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<float>>(_a[2]))); break;
         case 5: { char* _r = _t->slice((*reinterpret_cast< std::add_pointer_t<char*>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[3])));
             if (_a[0]) *reinterpret_cast< char**>(_a[0]) = std::move(_r); }  break;
-        case 6: _t->UpBlock(); break;
-        case 7: _t->DownBlock(); break;
-        case 8: _t->startGenerateBlock(); break;
-        case 9: _t->stopGenerateBlock(); break;
-        case 10: _t->readSerialData(); break;
-        case 11: _t->openSerialPort(); break;
-        case 12: _t->closeSerialport(); break;
+        case 6: _t->readSerialData(); break;
+        case 7: _t->setParameters(); break;
         default: ;
         }
     }
@@ -324,13 +279,13 @@ int Widget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 13)
+        if (_id < 8)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 13;
+        _id -= 8;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 13)
+        if (_id < 8)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 13;
+        _id -= 8;
     }
     return _id;
 }

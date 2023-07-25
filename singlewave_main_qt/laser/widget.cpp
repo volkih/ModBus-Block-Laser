@@ -40,8 +40,9 @@ Widget::Widget(QWidget *parent)
     startBlockButton = new QPushButton("Включение блока");
     generationBlockButton = new QPushButton("Начать генерацию");
     SyncBlockButton = new QPushButton("Внутренняя синхронизация");
-    openPortButton = new QPushButton("Открыть порт");
-    closePortButton = new QPushButton("Закрыть порт");
+    //openPortButton = new QPushButton("Открыть порт");
+    //closePortButton = new QPushButton("Закрыть порт");
+    setParametersButton = new QPushButton("Записать параметры");
 
     Logger = new QTextEdit;
 
@@ -57,7 +58,7 @@ Widget::Widget(QWidget *parent)
     layout_main = new QHBoxLayout;
     layout = new QVBoxLayout;
     layout_H = new QHBoxLayout;
-    layoutPort = new QHBoxLayout;
+    //layoutPort = new QHBoxLayout;
 
 
     layout->addWidget(generationLabel);
@@ -86,11 +87,12 @@ Widget::Widget(QWidget *parent)
 
     layout_main->addLayout(layout);
     layout_main->addWidget(Logger);
+    layout_main->addWidget(setParametersButton);
 
-    layoutPort->addWidget(openPortButton);
-    layoutPort->addWidget(closePortButton);
+    //layoutPort->addWidget(openPortButton);
+    //layoutPort->addWidget(closePortButton);
 
-    layout_main->addLayout(layoutPort);
+    //layout_main->addLayout(layoutPort);
     setLayout(layout_main);
 
 
@@ -121,6 +123,7 @@ Widget::Widget(QWidget *parent)
     // Создание нажатия кнопок
     connect(startBlockButton, &QPushButton::clicked, this, &Widget::clickedStartBlock);
     connect(generationBlockButton, &QPushButton::clicked, this, &Widget::clickedGenerateBlock);
+    connect(setParametersButton, &QPushButton::clicked, this, &Widget::setParameters);
 
     serialPort = new QSerialPort;
     // Создает и настраивает объект QSerialPort
@@ -130,7 +133,6 @@ Widget::Widget(QWidget *parent)
     serialPort->setParity(QSerialPort::NoParity);
     serialPort->setStopBits(QSerialPort::OneStop);
     serialPort->open(QIODevice::ReadWrite);
-    serialPort->write("upBlock");
 }
 
 Widget::~Widget()
@@ -152,6 +154,7 @@ Widget::~Widget()
     delete startBlockButton;
     delete generationBlockButton;
     delete SyncBlockButton;
+    delete setParametersButton;
     delete layout;
     delete layout_H;
     delete layout_main;
@@ -166,17 +169,30 @@ Widget::~Widget()
 
 void Widget::clickedStartBlock()
 {
-    if (startBlockButton->text() == "Включение блока"){
-        startBlockButton->setStyleSheet("background-color: #0af20a");
-        startBlockButton->setText("Выключение блока");
-        UpBlock();
-    }
-    else{
-        startBlockButton->setStyleSheet("background-color: #f2190a");
-        startBlockButton->setText("Включение блока");
-        DownBlock();
+    if(serialPort->isOpen()){
+        if (startBlockButton->text() == "Включение блока"){
+            startBlockButton->setStyleSheet("background-color: #0af20a");
+            startBlockButton->setText("Выключение блока");
+
+            //Включаем блок
+            serialPort->write("upBlock");
+            serialPort->waitForBytesWritten(-1);
+            readSerialData();
+        }
+        else{
+            startBlockButton->setStyleSheet("background-color: #f2190a");
+            startBlockButton->setText("Включение блока");
+
+            // Выключаем блок
+            serialPort->write("downBlock");
+            serialPort->waitForBytesWritten(-1);
+            readSerialData();
+        }
+    }else{
+        QMessageBox::warning(this,"Error","Port is not open!");
     }
 }
+
 
 void Widget::clickedGenerateBlock()
 {
@@ -184,57 +200,32 @@ void Widget::clickedGenerateBlock()
     float Period;
     float NumberOfWarmPulses;
 
-    if(generationBlockButton->text() == "Начать генерацию")
+    if(serialPort->isOpen()){
+        if(generationBlockButton->text() == "Начать генерацию")
         {
-        try {
-            // Проверка и получение значений параметров из полей ввода
-            float generationFrequency = validateInput<float>(generationEdit);
-            float ratedPumpingDuration = validateInput<float>(ratedPumpingDurationEdit);
-            float phaseDuration = validateInput<float>(phaseDurationEdit);
-            // float maxPumpingDuration = validateInput<float>(maxPumpingDurationEdit);
-            float correctionFactor = validateInput<float>(correctionFactorEdit);
-            float preparatoryPulseDuration = validateInput<float>(preparatoryPulseDurationEdit);
-            // float pumpingCurrent = validateInput<float>(pumpingCurrentEdit);
-
-
-            // Perform any necessary actions with the parameters
-
-            Parameter_calculation(ratedPumpingDuration, correctionFactor, phaseDuration, NominalFrequency, generationFrequency, preparatoryPulseDuration, Duration, Period, NumberOfWarmPulses);
-
-            DataPort(Duration,Period,NumberOfWarmPulses);
-
             generationBlockButton->setStyleSheet("background-color: #0af20a");
             generationBlockButton->setText("Закончить генерацию");
 
-            startGenerateBlock();
+            serialPort->write("startGenerate");
+            serialPort->waitForBytesWritten(-1);
+            readSerialData();
+        }
+        else
+        {
+            generationBlockButton->setStyleSheet("background-color: #f2190a");
+            generationBlockButton->setText("Начать генерацию");
 
-            // Print the parameter values to the console
-            if (flag){
-                qDebug() << "Финальный импульс: " << Duration;
-                qDebug() << "Основной период: " << Period;
-                //SerialPort(Duration,Period);
-            }else{
+            serialPort->write("stopGenerate");
+            serialPort->waitForBytesWritten(-1);
 
-                qDebug() << "Финальный импульс: " << Duration;
-                qDebug() << "Прогревочный период: " << Period;
-                float NominalPeriod = 1 / generationFrequency;
-                qDebug() << "Номинальный период: " << NominalPeriod;
-                    //SerialPort(Duration, Period, NumberOfWarmPulses);
-
-            }
-
-
-        } catch (const exception& e) {
-            QMessageBox::critical(this, "Ошибка", e.what());
-      }
-    }else
-    {
-        generationBlockButton->setStyleSheet("background-color: #f2190a");
-        generationBlockButton->setText("Включить генерацию");
-        stopGenerateBlock();
+            readSerialData();
+        }
     }
-
+    else{
+        QMessageBox::warning(this,"Error","Port is not open!");
+    }
 }
+
 
 void Widget::Parameter_calculation(float t_n, float k, float t_fr, float F_n, float F_p, float t_prep, float &t_ef_temp, float &T_temp, float &N)
 {
@@ -290,55 +281,7 @@ void Widget::DataPort(float FinalDuration, float FinalPeriod, float NumberOfPuls
 
 }
 
-void Widget::UpBlock()
-{
-      if(serialPort->isOpen()){
 
-        serialPort->write("upBlock");
-        serialPort->waitForBytesWritten(-1);
-        readSerialData();
-      }
-      else{
-        QMessageBox::warning(this,"Error","Port is not open!");
-      }
-}
-
-void Widget::DownBlock()
-{
-      if(serialPort->isOpen()){
-        // Отправляем данные через последовательный порт
-        serialPort->write("downBlock");
-        serialPort->waitForBytesWritten(-1);
-      }
-      else{
-        QMessageBox::warning(this,"Error","Port is not open!");
-      }
-
-}
-
-void Widget::startGenerateBlock()
-{
-      if(serialPort->isOpen()){
-        // Отправляем данные через последовательный порт
-        serialPort->write("startGenerate");
-        serialPort->waitForBytesWritten(-1);
-      }
-      else{
-        QMessageBox::warning(this,"Error","Port is not open!");
-      }
-}
-
-void Widget::stopGenerateBlock()
-{
-      if(serialPort->isOpen()){
-        // Отправляем данные через последовательный порт
-        serialPort->write("stopGenerate");
-        serialPort->waitForBytesWritten(-1);
-      }
-      else{
-        QMessageBox::warning(this,"Error","Port is not open!");
-      }
-}
 
 void Widget::readSerialData()
 {
@@ -346,22 +289,40 @@ void Widget::readSerialData()
 
       if(serialPort->isOpen()){
         // Получаем данные через последовательный порт
-        if(serialPort->waitForReadyRead(-1))
-        {
-            data = serialPort->readAll();
-            Logger->append(data);
-        }
+        data = serialPort->readAll();
+        Logger->append(data);
       }
       else{
         QMessageBox::warning(this,"Error","Port is not open!");
       }
 }
 
-void Widget::openSerialPort()
+void Widget::setParameters()
 {
-}
+    float Duration;
+    float Period;
+    float NumberOfWarmPulses;
 
-void Widget::closeSerialport()
-{
+    try {
+        // Проверка и получение значений параметров из полей ввода
+        float generationFrequency = validateInput<float>(generationEdit);
+        float ratedPumpingDuration = validateInput<float>(ratedPumpingDurationEdit);
+        float phaseDuration = validateInput<float>(phaseDurationEdit);
+        // float maxPumpingDuration = validateInput<float>(maxPumpingDurationEdit);
+        float correctionFactor = validateInput<float>(correctionFactorEdit);
+        float preparatoryPulseDuration = validateInput<float>(preparatoryPulseDurationEdit);
+        // float pumpingCurrent = validateInput<float>(pumpingCurrentEdit);
+
+
+        // Perform any necessary actions with the parameters
+
+        Parameter_calculation(ratedPumpingDuration, correctionFactor, phaseDuration, NominalFrequency, generationFrequency, preparatoryPulseDuration, Duration, Period, NumberOfWarmPulses);
+
+        DataPort(Duration,Period,NumberOfWarmPulses);
+
+    } catch (const exception& e) {
+        QMessageBox::critical(this, "Ошибка", e.what());
+      }
+
 }
 

@@ -11,8 +11,8 @@
 #define pinD2 4
 
 // Конфигурация модуля RS-485
-#define RS485_RX 3
-#define RS485_TX 1
+#define RS485_RX 15
+#define RS485_TX 13
 
 // Параметры подключения Modbus
 #define MODBUS_SLAVE_ID 1
@@ -53,12 +53,8 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  //readSerialData();
-  if (Serial.available()>0)
-  {
-    String data = Serial.readString(); // Чтение данных до символа новой строки
-    Serial.write("Block is up!!!"); 
-  }
+  
+  
 
 }
 
@@ -81,6 +77,7 @@ void readSerialData()
       PulseDuration=round(atoi(strtok(buffer," ")));
       Period=round(stof(strtok(NULL," "))*10);
       NumberOfPulses=atoi(strtok(NULL," "));
+      Serial.write("Done!");
       Serial.println(PulseDuration);
       Serial.println(Period);
       Serial.println(NumberOfPulses);
@@ -124,7 +121,7 @@ void SetBlock()
     String flag = Serial.readString();
     if(flag == "upBlock")
     {  
-      Serial.write("Block is up!!!");
+      Serial.write("Block is up!");
       au16block[0] = 2;
       telegram_block.u8id = MODBUS_SLAVE_ID;
       telegram_block.u8fct = WRITE_REGISTR;

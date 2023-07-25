@@ -65,8 +65,9 @@ private:
     QPushButton *startBlockButton;
     QPushButton *generationBlockButton;
     QPushButton *SyncBlockButton;
-    QPushButton *openPortButton;
-    QPushButton *closePortButton;
+    //QPushButton *openPortButton;
+    //QPushButton *closePortButton;
+    QPushButton *setParametersButton;
     QLabel *generationLabel;
     QLabel *ratedPumpingDurationLabel;
     QLabel *phaseDurationLabel;
@@ -101,13 +102,7 @@ private slots:
         s[j] = 0;
         return s;
     }
-    void UpBlock();
-    void DownBlock();
-    void startGenerateBlock();
-    void stopGenerateBlock();
     void readSerialData();
-    void openSerialPort();
-    void closeSerialport();
-
+    void setParameters();
 };
 #endif // WIDGET_H
