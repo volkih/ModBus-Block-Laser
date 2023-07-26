@@ -9,7 +9,7 @@ D:/GitHub/ModBus-Block-Laser/singlewave_main_qt/build-laser-Desktop_Qt_6_5_1_Min
   D:/Programs/Qt/6.5.1/mingw_64/include/QtCore/QObject \
   D:/Programs/Qt/6.5.1/mingw_64/include/QtCore/QString \
   D:/Programs/Qt/6.5.1/mingw_64/include/QtCore/QStringList \
-  D:/Programs/Qt/6.5.1/mingw_64/include/QtCore/QThread \
+  D:/Programs/Qt/6.5.1/mingw_64/include/QtCore/QTimer \
   D:/Programs/Qt/6.5.1/mingw_64/include/QtCore/QVariant \
   D:/Programs/Qt/6.5.1/mingw_64/include/QtCore/QtCore \
   D:/Programs/Qt/6.5.1/mingw_64/include/QtCore/QtCoreDepends \

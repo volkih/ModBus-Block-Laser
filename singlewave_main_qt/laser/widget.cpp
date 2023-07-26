@@ -118,13 +118,14 @@ Widget::Widget(QWidget *parent)
     floatValidator->setRange(MinBorder, MaxPumpDuration, demicalPlaces);
     preparatoryPulseDurationEdit->setValidator(floatValidator);
 
-    // Объявление последовательного порта
+
 
     // Создание нажатия кнопок
     connect(startBlockButton, &QPushButton::clicked, this, &Widget::clickedStartBlock);
     connect(generationBlockButton, &QPushButton::clicked, this, &Widget::clickedGenerateBlock);
     connect(setParametersButton, &QPushButton::clicked, this, &Widget::setParameters);
 
+    // Объявление последовательного порта
     serialPort = new QSerialPort;
     // Создает и настраивает объект QSerialPort
     serialPort->setPortName(portName);
@@ -171,21 +172,25 @@ void Widget::clickedStartBlock()
 {
     if(serialPort->isOpen()){
         if (startBlockButton->text() == "Включение блока"){
-            startBlockButton->setStyleSheet("background-color: #0af20a");
-            startBlockButton->setText("Выключение блока");
 
             //Включаем блок
             serialPort->write("upBlock");
             serialPort->waitForBytesWritten(-1);
+
+            startBlockButton->setStyleSheet("background-color: #0af20a");
+            startBlockButton->setText("Выключение блока");
+
             readSerialData();
         }
         else{
-            startBlockButton->setStyleSheet("background-color: #f2190a");
-            startBlockButton->setText("Включение блока");
 
             // Выключаем блок
             serialPort->write("downBlock");
             serialPort->waitForBytesWritten(-1);
+
+            startBlockButton->setStyleSheet("background-color: #f2190a");
+            startBlockButton->setText("Включение блока");
+
             readSerialData();
         }
     }else{
@@ -270,7 +275,7 @@ void Widget::DataPort(float FinalDuration, float FinalPeriod, float NumberOfPuls
         char chars[finalmessage.size()];
         finalmessage.copy(chars, finalmessage.size());
         slice(chars,0,26);
-        // cout << chars << endl;
+
         // Отправляем данные через последовательный порт
         serialPort->write(chars);
         serialPort->waitForBytesWritten(-1);
@@ -285,11 +290,9 @@ void Widget::DataPort(float FinalDuration, float FinalPeriod, float NumberOfPuls
 
 void Widget::readSerialData()
 {
-      QString data = "";
-
       if(serialPort->isOpen()){
         // Получаем данные через последовательный порт
-        data = serialPort->readAll();
+        QByteArray data = serialPort->readAll();
         Logger->append(data);
       }
       else{

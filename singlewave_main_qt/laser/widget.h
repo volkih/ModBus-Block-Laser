@@ -16,8 +16,9 @@
 #include <QString>
 #include <QMessageBox>
 #include <QTextEdit>
-#include <QThread>
+#include <QTimer>
 #include <QMessageBox>
+#include <QSettings>
 
 #include <iostream>
 #include <stdexcept>

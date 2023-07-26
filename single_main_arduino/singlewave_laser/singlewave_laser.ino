@@ -1,9 +1,10 @@
 #include <iomanip>
 #include <sstream>
 #include <iostream>
-#include <ModbusRtu.h>
+#include <ModbusRTU.h>
 #include <string>
 #include <algorithm>
+#include <SoftwareSerial.h>
 
 
 //Конфигурация пинов
@@ -11,8 +12,8 @@
 #define pinD2 4
 
 // Конфигурация модуля RS-485
-#define RS485_RX 15
-#define RS485_TX 13
+#define RS485_RX 13
+#define RS485_TX 15
 
 // Параметры подключения Modbus
 #define MODBUS_SLAVE_ID 1
@@ -24,38 +25,74 @@
 #define VOLTAGE_REGISTR 4
 #define CURRENT_REGISTR 3
 #define BLOCK_REGISTR 9
-//#define BLOCK_UP 2
-//#define BLOCK_DOWN 4
-//#define BLOCK_GENERATE 8
-//#define BLOCK_NOTGENERATE 10
-//#define BLOCK_INTERNAL_SYNC 20
-//#define BLOCK_EXTERNAL_SYNC 40
+#define BLOCK_UP 2
+#define BLOCK_DOWN 4
+#define BLOCK_GENERATE 8
+#define BLOCK_NOTGENERATE 10
+#define BLOCK_INTERNAL_SYNC 20
+#define BLOCK_EXTERNAL_SYNC 40
+
 
 // Инициализация объектов
-Modbus master(MODBUS_SLAVE_ID,Serial,RS485_TX);
-modbus_t telegram_freq,telegram_pulse,telegram_curr,telegram_volt,telegram_block;
+ModbusRTU mb;
+EspSoftwareSerial::UART myPort;
+
+bool cb(Modbus::ResultCode event, uint16_t transactionId, void* data) {
+#ifdef ESP8266
+  Serial.printf_P("Request result: 0x%02X, Mem: %d\n", event, ESP.getFreeHeap());
+#elif ESP32
+  Serial.printf_P("Request result: 0x%02X, Mem: %d\n", event, ESP.getFreeHeap());
+#else
+  Serial.print("Request result: 0x");
+  Serial.print(event, HEX);
+#endif
+  return true;
+}
 
 const int numValues = 3;
-uint16_t au16data[1];
+uint16_t au16data[1] = {1};
 uint16_t au16block[1];
 float PulseDuration,Period,NumberOfPulses;
 char buffer[28];
+String flag = "";
+
+
 
 using namespace std;
 void setup() {
 
   // put your setup code here, to run once:
   Serial.begin(9600);
-  
+  myPort.begin(9600, SWSERIAL_8N2, RS485_RX, RS485_TX, false);
+  mb.begin(&myPort);
   
 
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-  
-  
+  if (Serial.available()>0)
+  {
+    flag = Serial.readString();
+    
+    if (flag == "upBlock"){
+      upBlock();
+    }
+    else if (flag == "downBlock")
+    {
+      downBlock();
+    }
+  }
 
+  //myPort.write(start, sizeof(start));
+  //delay(5000);
+  //myPort.write(stop, sizeof(stop));
+  //delay(5000);
+ 
+
+
+  
+  
 }
 
 void readSerialData()
@@ -71,9 +108,8 @@ void readSerialData()
           }
         }
     if (digit){
-      Serial.println(data);
       data.toCharArray(buffer,28);
-      Serial.println(buffer);
+      Serial.write(buffer);
       PulseDuration=round(atoi(strtok(buffer," ")));
       Period=round(stof(strtok(NULL," "))*10);
       NumberOfPulses=atoi(strtok(NULL," "));
@@ -87,91 +123,23 @@ void readSerialData()
   }
 }
 
-void MasterSetup()
+void upBlock()
 {
-  pinMode(RS485_RX, INPUT);
-  pinMode(RS485_TX, OUTPUT);
-  master.begin(9600);
+  mb.writeHreg(MODBUS_SLAVE_ID,BLOCK_REGISTR,BLOCK_UP,cb);  
+}
+void downBlock()
+{
+  mb.writeHreg(MODBUS_SLAVE_ID,BLOCK_REGISTR,BLOCK_DOWN,cb);
 }
 
-void sendModbusCommand() 
+void generateBlock()
 {
-  if (Serial.available()>0)
-  {
-    String flag = Serial.readString();
-    if(flag == "start")
-    {  
-      telegram_freq.u8id = MODBUS_SLAVE_ID;
-      telegram_freq.u8fct = WRITE_REGISTR;
-      telegram_freq.u16RegAdd = FREQUENCY_REGISTR;
-      telegram_freq.u16CoilsNo = 1;
-      telegram_freq.au16reg = au16data;
-      // Отправка команды через Modbus
-      master.query(telegram_freq);
-    }
-
-  }
+  mb.writeHreg(MODBUS_SLAVE_ID,BLOCK_REGISTR,BLOCK_GENERATE,cb);
 }
 
-void SetBlock()
+void notgenerateBlock()
 {
-  if (Serial.available()>0)
-  {
-    
-    String flag = Serial.readString();
-    if(flag == "upBlock")
-    {  
-      Serial.write("Block is up!");
-      au16block[0] = 2;
-      telegram_block.u8id = MODBUS_SLAVE_ID;
-      telegram_block.u8fct = WRITE_REGISTR;
-      telegram_block.u16RegAdd = BLOCK_REGISTR;
-      telegram_block.u16CoilsNo = 1;
-      telegram_block.au16reg = au16block;
-      // Отправка команды через Modbus
-      master.query(telegram_block);
-    }
-    else if (flag = "downBlock")
-    {
-      au16block[0] = 4;
-      telegram_block.u8id = MODBUS_SLAVE_ID;
-      telegram_block.u8fct = WRITE_REGISTR;
-      telegram_block.u16RegAdd = BLOCK_REGISTR;
-      telegram_block.u16CoilsNo = 1;
-      telegram_block.au16reg = au16block;
-      // Отправка команды через Modbus
-      master.query(telegram_block);
-    }
-  }
-}
-void startGenerationBlock()
-{
-    if (Serial.available()>0)
-  {
-    String flag = Serial.readString();
-    if(flag == "startGenerate")
-    {  
-      au16block[0] = 8;
-      telegram_block.u8id = MODBUS_SLAVE_ID;
-      telegram_block.u8fct = WRITE_REGISTR;
-      telegram_block.u16RegAdd = BLOCK_REGISTR;
-      telegram_block.u16CoilsNo = 1;
-      telegram_block.au16reg = au16block;
-      // Отправка команды через Modbus
-      master.query(telegram_block);
-    }
-    else if (flag = "stopGenerate")
-    {
-      au16block[0] = 10;
-      telegram_block.u8id = MODBUS_SLAVE_ID;
-      telegram_block.u8fct = WRITE_REGISTR;
-      telegram_block.u16RegAdd = BLOCK_REGISTR;
-      telegram_block.u16CoilsNo = 1;
-      telegram_block.au16reg = au16block;
-      // Отправка команды через Modbus
-      master.query(telegram_block);
-    }
-  }
+  mb.writeHreg(MODBUS_SLAVE_ID,BLOCK_REGISTR,BLOCK_NOTGENERATE,cb);  
 }
 
 std::string intToHex(int value) {

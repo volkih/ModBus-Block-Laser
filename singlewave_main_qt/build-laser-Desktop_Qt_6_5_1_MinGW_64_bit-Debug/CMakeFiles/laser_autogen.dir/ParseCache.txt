@@ -12,7 +12,7 @@ D:/GitHub/ModBus-Block-Laser/singlewave_main_qt/laser/widget.h
  mdp:D:/Programs/Qt/6.5.1/mingw_64/include/QtCore/QObject
  mdp:D:/Programs/Qt/6.5.1/mingw_64/include/QtCore/QString
  mdp:D:/Programs/Qt/6.5.1/mingw_64/include/QtCore/QStringList
- mdp:D:/Programs/Qt/6.5.1/mingw_64/include/QtCore/QThread
+ mdp:D:/Programs/Qt/6.5.1/mingw_64/include/QtCore/QTimer
  mdp:D:/Programs/Qt/6.5.1/mingw_64/include/QtCore/QVariant
  mdp:D:/Programs/Qt/6.5.1/mingw_64/include/QtCore/QtCore
  mdp:D:/Programs/Qt/6.5.1/mingw_64/include/QtCore/QtCoreDepends
