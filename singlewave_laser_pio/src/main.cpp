@@ -1,3 +1,5 @@
+#include <Arduino.h>
+
 #include <iomanip>
 #include <sstream>
 #include <iostream>
@@ -33,7 +35,6 @@
 #define BLOCK_EXTERNAL_SYNC 40
 
 
-// Инициализация объектов
 ModbusRTU mb;
 EspSoftwareSerial::UART myPort;
 
@@ -50,24 +51,28 @@ bool cb(Modbus::ResultCode event, uint16_t transactionId, void* data) {
 }
 
 const int numValues = 3;
-uint16_t au16data[1] = {1};
-uint16_t au16block[1];
 float PulseDuration,Period,NumberOfPulses;
 char buffer[28];
 String flag = "";
 
-
+// put function declarations here:
+void readSerialData();
+void upBlock();
+void downBlock();
+void upBlock();
+void generateBlock();
+void notgenerateBlock();
 
 using namespace std;
-void setup() {
 
+void setup()
+{
   // put your setup code here, to run once:
   Serial.begin(9600);
   myPort.begin(9600, SWSERIAL_8N2, RS485_RX, RS485_TX, false);
   mb.begin(&myPort);
-  
 
-}
+ }
 
 void loop() {
   // put your main code here, to run repeatedly:
@@ -83,17 +88,9 @@ void loop() {
       downBlock();
     }
   }
-
-  //myPort.write(start, sizeof(start));
-  //delay(5000);
-  //myPort.write(stop, sizeof(stop));
-  //delay(5000);
- 
-
-
-  
-  
 }
+
+// put function definitions here:
 
 void readSerialData()
 {
