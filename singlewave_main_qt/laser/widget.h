@@ -63,12 +63,20 @@ private:
     QLineEdit *correctionFactorEdit;
     QLineEdit *preparatoryPulseDurationEdit;
     QLineEdit *pumpingCurrentEdit;
+
     QPushButton *startBlockButton;
     QPushButton *generationBlockButton;
     QPushButton *SyncBlockButton;
-    //QPushButton *openPortButton;
-    //QPushButton *closePortButton;
     QPushButton *setParametersButton;
+
+    QPushButton *setFrequencyButton;
+    QPushButton *setRatedPumpingButton;
+    QPushButton *setPhaseButton;
+    QPushButton *setMaxPumpingButton;
+    QPushButton *setFactorButton;
+    QPushButton *setWarmButton;
+    QPushButton *setCurrentButton;
+
     QLabel *generationLabel;
     QLabel *ratedPumpingDurationLabel;
     QLabel *phaseDurationLabel;
@@ -76,12 +84,16 @@ private:
     QLabel *correctionFactorLabel;
     QLabel *preparatoryPulseDurationLabel;
     QLabel *pumpingCurrentLabel;
+
     QVBoxLayout *layout;
     QHBoxLayout *layout_H;
     QHBoxLayout *layout_main;
-    QDoubleValidator *floatValidator;
-    QTextEdit *Logger;
     QHBoxLayout *layoutPort;
+
+    QDoubleValidator *floatValidator;
+
+    QTextEdit *Logger;
+
     QSerialPort *serialPort;
 
 private slots:
