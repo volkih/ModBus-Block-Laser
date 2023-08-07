@@ -160,7 +160,7 @@ Widget::Widget(QWidget *parent)
     serialPort->setBaudRate(QSerialPort::Baud9600);
     serialPort->setDataBits(QSerialPort::Data8);
     serialPort->setParity(QSerialPort::NoParity);
-    serialPort->setStopBits(QSerialPort::TwoStop);
+    serialPort->setStopBits(QSerialPort::OneStop);
     serialPort->open(QIODevice::ReadWrite);
 }
 

@@ -54,6 +54,8 @@ bool cb(Modbus::ResultCode event, uint16_t transactionId, void* data) {
 const int numValues = 3;
 float PulseDuration,Period,NumberOfPulses;
 char buffer[28];
+char flagdata[50];
+bool toggleflag = 0;
 char commandChar[1];
 String flag = "";
 
@@ -84,9 +86,8 @@ void loop() {
   if (Serial.available()>0)
   {
     flag = Serial.readString();
-    /*flag.substring(0, 1).toCharArray(commandChar, 1);
-
-    switch (commandChar[0])
+    flag.toCharArray(flagdata, flag.length() + 1);
+    switch (flagdata[0])
     {
     case 'F':
       setCurrent(flag);
@@ -94,20 +95,11 @@ void loop() {
     case 'u':
       upBlock();
       break;
-
     case 'd':
       downBlock();
       break;
     default:
       break;
-    }*/
-    if (flag == "upBlock")
-    {
-      upBlock();
-    }
-    else if (flag == "downBlock")
-    {
-      downBlock();
     }
   }
 }
