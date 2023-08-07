@@ -58,15 +58,8 @@ char flagdata[50];
 bool toggleflag = 0;
 char commandChar[1];
 String flag = "";
-<<<<<<< HEAD
-char ch;
-char rawData[50];
-bool toggleflag = 0;
-char commandChar[1];
-=======
 
 
->>>>>>> parametersButtons
 // put function declarations here:
 void readSerialData();
 void upBlock();
@@ -84,10 +77,6 @@ void setup()
   Serial.begin(9600);
   myPort.begin(9600, SWSERIAL_8N2, RS485_RX, RS485_TX, false);
   mb.begin(&myPort);
-<<<<<<< HEAD
-  pinMode(LED_BUILTIN,OUTPUT);
-=======
->>>>>>> parametersButtons
  }
 
 void loop() {
@@ -97,18 +86,6 @@ void loop() {
   if (Serial.available()>0)
   {
     flag = Serial.readString();
-<<<<<<< HEAD
-    flag.toCharArray(rawData,flag.length()+1);
-
-    switch (rawData[0])
-    {
-    case 'u':
-      toggleflag = !toggleflag;
-      digitalWrite(LED_BUILTIN,toggleflag);
-      myPort.write("fdfdfsdghdfetrsfdgfnhhdgsfdhfjrteyt");
-      break;
-    
-=======
     flag.toCharArray(flagdata, flag.length() + 1);
     switch (flagdata[0])
     {
@@ -121,7 +98,6 @@ void loop() {
     case 'd':
       downBlock();
       break;
->>>>>>> parametersButtons
     default:
       break;
     }

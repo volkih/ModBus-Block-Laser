@@ -33,8 +33,7 @@
 #define BLOCK_NOTGENERATE 10
 #define BLOCK_INTERNAL_SYNC 20
 #define BLOCK_EXTERNAL_SYNC 40
-#define BLOCK_VOLTAGE 100
-#define BLOCK_CURRENT 100
+
 
 ModbusRTU mb;
 EspSoftwareSerial::UART myPort;
@@ -54,19 +53,11 @@ bool cb(Modbus::ResultCode event, uint16_t transactionId, void* data) {
 const int numValues = 3;
 float PulseDuration,Period,NumberOfPulses;
 char buffer[28];
-char flagdata[50];
-bool toggleflag = 0;
-char commandChar[1];
 String flag = "";
-<<<<<<< HEAD
 char ch;
 char rawData[50];
 bool toggleflag = 0;
 char commandChar[1];
-=======
-
-
->>>>>>> parametersButtons
 // put function declarations here:
 void readSerialData();
 void upBlock();
@@ -74,7 +65,6 @@ void downBlock();
 void upBlock();
 void generateBlock();
 void notgenerateBlock();
-void setCurrent(String);
 
 using namespace std;
 
@@ -84,20 +74,14 @@ void setup()
   Serial.begin(9600);
   myPort.begin(9600, SWSERIAL_8N2, RS485_RX, RS485_TX, false);
   mb.begin(&myPort);
-<<<<<<< HEAD
   pinMode(LED_BUILTIN,OUTPUT);
-=======
->>>>>>> parametersButtons
  }
 
 void loop() {
   // put your main code here, to run repeatedly:
-
-  //readSerialData();
   if (Serial.available()>0)
   {
     flag = Serial.readString();
-<<<<<<< HEAD
     flag.toCharArray(rawData,flag.length()+1);
 
     switch (rawData[0])
@@ -108,20 +92,6 @@ void loop() {
       myPort.write("fdfdfsdghdfetrsfdgfnhhdgsfdhfjrteyt");
       break;
     
-=======
-    flag.toCharArray(flagdata, flag.length() + 1);
-    switch (flagdata[0])
-    {
-    case 'F':
-      setCurrent(flag);
-      break;
-    case 'u':
-      upBlock();
-      break;
-    case 'd':
-      downBlock();
-      break;
->>>>>>> parametersButtons
     default:
       break;
     }
@@ -165,11 +135,6 @@ void upBlock()
 void downBlock()
 {
   mb.writeHreg(MODBUS_SLAVE_ID,BLOCK_REGISTR,BLOCK_DOWN,cb);
-}
-void setCurrent(String str)
-{
-  str.remove(0,1);
-  //mb.writeHreg(MODBUS_SLAVE_ID, FREQUENCY_REGISTR, BLOCK_FREQUENCY, cb);
 }
 
 void generateBlock()

@@ -117,5 +117,12 @@ private slots:
     }
     void readSerialData();
     void setParameters();
+    void setFrequency();
+    void setRatedPumping();
+    void setPhase();
+    void setMaxPumping();
+    void setFactor();
+    void setWarm();
+    void setCurrent();
 };
 #endif // WIDGET_H
