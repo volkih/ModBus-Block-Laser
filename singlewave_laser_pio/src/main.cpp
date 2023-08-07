@@ -54,7 +54,10 @@ const int numValues = 3;
 float PulseDuration,Period,NumberOfPulses;
 char buffer[28];
 String flag = "";
-
+char ch;
+char rawData[50];
+bool toggleflag = 0;
+char commandChar[1];
 // put function declarations here:
 void readSerialData();
 void upBlock();
@@ -71,7 +74,7 @@ void setup()
   Serial.begin(9600);
   myPort.begin(9600, SWSERIAL_8N2, RS485_RX, RS485_TX, false);
   mb.begin(&myPort);
-
+  pinMode(LED_BUILTIN,OUTPUT);
  }
 
 void loop() {
@@ -79,13 +82,18 @@ void loop() {
   if (Serial.available()>0)
   {
     flag = Serial.readString();
-    
-    if (flag == "upBlock"){
-      upBlock();
-    }
-    else if (flag == "downBlock")
+    flag.toCharArray(rawData,flag.length()+1);
+
+    switch (rawData[0])
     {
-      downBlock();
+    case 'u':
+      toggleflag = !toggleflag;
+      digitalWrite(LED_BUILTIN,toggleflag);
+      myPort.write("fdfdfsdghdfetrsfdgfnhhdgsfdhfjrteyt");
+      break;
+    
+    default:
+      break;
     }
   }
 }
