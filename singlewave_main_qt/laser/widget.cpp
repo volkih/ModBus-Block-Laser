@@ -44,6 +44,14 @@ Widget::Widget(QWidget *parent)
     //closePortButton = new QPushButton("Закрыть порт");
     setParametersButton = new QPushButton("Записать параметры");
 
+    setFrequencyButton = new QPushButton("Выставить");
+    setRatedPumpingButton = new QPushButton("Выставить");
+    setPhaseButton = new QPushButton("Выставить");
+    setMaxPumpingButton = new QPushButton("Выставить");
+    setFactorButton = new QPushButton("Выставить");
+    setWarmButton = new QPushButton("Выставить");
+    setCurrentButton = new QPushButton("Выставить");
+
     Logger = new QTextEdit;
 
     //Объявление свойств объектов
@@ -63,19 +71,31 @@ Widget::Widget(QWidget *parent)
 
     layout->addWidget(generationLabel);
     layout->addWidget(generationEdit);
+    layout->addWidget(setFrequencyButton);
+
     layout->addWidget(ratedPumpingDurationLabel);
     layout->addWidget(ratedPumpingDurationEdit);
+    layout->addWidget(setRatedPumpingButton);
+
     layout->addWidget(phaseDurationLabel);
     layout->addWidget(phaseDurationEdit);
+    layout->addWidget(setPhaseButton);
+
     layout->addWidget(maxPumpingDurationLabel);
     layout->addWidget(maxPumpingDurationEdit);
+    layout->addWidget(setMaxPumpingButton);
+
     layout->addWidget(correctionFactorLabel);
     layout->addWidget(correctionFactorEdit);
+    layout->addWidget(setFactorButton);
+
     layout->addWidget(preparatoryPulseDurationLabel);
     layout->addWidget(preparatoryPulseDurationEdit);
+    layout->addWidget(setWarmButton);
+
     layout->addWidget(pumpingCurrentLabel);
     layout->addWidget(pumpingCurrentEdit);
-
+    layout->addWidget(setCurrentButton);
 
 
     layout_H->addWidget(generationBlockButton);
@@ -125,6 +145,14 @@ Widget::Widget(QWidget *parent)
     connect(generationBlockButton, &QPushButton::clicked, this, &Widget::clickedGenerateBlock);
     connect(setParametersButton, &QPushButton::clicked, this, &Widget::setParameters);
 
+    connect(setFrequencyButton, &QPushButton::clicked, this, &Widget::setFrequency);
+    connect(setRatedPumpingButton, &QPushButton::clicked, this, &Widget::setRatedPumping);
+    connect(setPhaseButton, &QPushButton::clicked, this, &Widget::setPhase);
+    connect(setMaxPumpingButton, &QPushButton::clicked, this, &Widget::setMaxPumping);
+    connect(setFactorButton, &QPushButton::clicked, this, &Widget::setFactor);
+    connect(setWarmButton, &QPushButton::clicked, this, &Widget::setWarm);
+    connect(setCurrentButton, &QPushButton::clicked, this, &Widget::setCurrent);
+
     // Объявление последовательного порта
     serialPort = new QSerialPort;
     // Создает и настраивает объект QSerialPort
@@ -132,7 +160,7 @@ Widget::Widget(QWidget *parent)
     serialPort->setBaudRate(QSerialPort::Baud9600);
     serialPort->setDataBits(QSerialPort::Data8);
     serialPort->setParity(QSerialPort::NoParity);
-    serialPort->setStopBits(QSerialPort::OneStop);
+    serialPort->setStopBits(QSerialPort::TwoStop);
     serialPort->open(QIODevice::ReadWrite);
 }
 
@@ -271,7 +299,7 @@ void Widget::DataPort(float FinalDuration, float FinalPeriod, float NumberOfPuls
         string message2 =to_string(FinalPeriod * 1000);
         string message3 =to_string(NumberOfPulses);
         string finalmessage = message1 + " " + message2 + " " + message3;
-        // Записывем числа в QByteArray
+        // Записывем числа
         char chars[finalmessage.size()];
         finalmessage.copy(chars, finalmessage.size());
         slice(chars,0,26);
@@ -327,5 +355,171 @@ void Widget::setParameters()
         QMessageBox::critical(this, "Ошибка", e.what());
       }
 
+}
+
+void Widget::setFrequency()
+{
+      string fmess = "F";
+
+      if (generationEdit->text() == "")
+      {
+        QMessageBox::critical(this,"Ошибка","Нет введеного значения");
+      }
+      else {
+        string mess = generationEdit->text().toStdString();
+        fmess.append(mess);
+
+        char chars[fmess.size()];
+        fmess.copy(chars,fmess.size());
+
+        qDebug() << chars;
+
+        serialPort->write(chars);
+        serialPort->waitForBytesWritten(-1);
+
+      }
+}
+
+void Widget::setRatedPumping()
+{
+      string fmess = "R";
+
+      if (ratedPumpingDurationEdit->text() == "")
+      {
+        QMessageBox::critical(this,"Ошибка","Нет введеного значения");
+      }
+      else {
+        string mess = ratedPumpingDurationEdit->text().toStdString();
+
+        fmess.append(mess);
+
+        char chars[fmess.size()];
+        fmess.copy(chars,fmess.size());
+
+        qDebug() << chars;
+
+        serialPort->write(chars);
+        serialPort->waitForBytesWritten(-1);
+
+      }
+}
+
+void Widget::setPhase()
+{
+      string fmess = "P";
+
+      if (phaseDurationEdit->text() == "")
+      {
+        QMessageBox::critical(this,"Ошибка","Нет введеного значения");
+      }
+      else {
+        string mess = phaseDurationEdit->text().toStdString();
+
+        fmess.append(mess);
+
+        char chars[fmess.size()];
+        fmess.copy(chars,fmess.size());
+
+        qDebug() << chars;
+
+        serialPort->write(chars);
+        serialPort->waitForBytesWritten(-1);
+
+      }
+}
+
+void Widget::setMaxPumping()
+{
+      string fmess = "M";
+
+      if (maxPumpingDurationEdit->text() == "")
+      {
+        QMessageBox::critical(this,"Ошибка","Нет введеного значения");
+      }
+      else {
+        string mess = maxPumpingDurationEdit->text().toStdString();
+
+        fmess.append(mess);
+
+        char chars[fmess.size()];
+        fmess.copy(chars,fmess.size());
+
+        qDebug() << chars;
+
+        serialPort->write(chars);
+        serialPort->waitForBytesWritten(-1);
+      }
+}
+
+void Widget::setFactor()
+{
+      string fmess = "C";
+
+      if (correctionFactorEdit->text() == "")
+      {
+        QMessageBox::critical(this,"Ошибка","Нет введеного значения");
+      }
+      else {
+        string mess = correctionFactorEdit->text().toStdString();
+
+        fmess.append(mess);
+
+        char chars[fmess.size()];
+        fmess.copy(chars,fmess.size());
+
+        qDebug() << chars;
+
+        serialPort->write(chars);
+        serialPort->waitForBytesWritten(-1);
+
+      }
+}
+
+void Widget::setWarm()
+{
+      string fmess = "W";
+
+      if (preparatoryPulseDurationEdit->text() == "")
+      {
+        QMessageBox::critical(this,"Ошибка","Нет введеного значения");
+      }
+      else {
+        string mess = preparatoryPulseDurationEdit->text().toStdString();
+
+        fmess.append(mess);
+
+        char chars[fmess.size()];
+        fmess.copy(chars,fmess.size());
+
+        qDebug() << chars;
+
+        serialPort->write(chars);
+        serialPort->waitForBytesWritten(-1);
+
+      }
+}
+
+void Widget::setCurrent()
+{
+      string fmess = "A";
+
+      if (pumpingCurrentEdit->text() == "")
+      {
+        QMessageBox::critical(this,"Ошибка","Нет введеного значения");
+      }
+      else {
+        string mess = pumpingCurrentEdit->text().toStdString();
+
+        fmess.append(mess);
+
+        char chars[fmess.size()];
+        fmess.copy(chars,fmess.size());
+
+        qDebug() << chars;
+
+        serialPort->write(chars);
+        serialPort->waitForBytesWritten(-1);
+
+      }
 }
 

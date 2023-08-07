@@ -64,11 +64,18 @@ static constexpr auto qt_meta_stringdata_CLASSWidgetENDCLASS = QtMocHelpers::str
     "from",
     "to",
     "readSerialData",
-    "setParameters"
+    "setParameters",
+    "setFrequency",
+    "setRatedPumping",
+    "setPhase",
+    "setMaxPumping",
+    "setFactor",
+    "setWarm",
+    "setCurrent"
 );
 #else  // !QT_MOC_HAS_STRING_DATA
 struct qt_meta_stringdata_CLASSWidgetENDCLASS_t {
-    uint offsetsAndSizes[52];
+    uint offsetsAndSizes[66];
     char stringdata0[7];
     char stringdata1[18];
     char stringdata2[1];
@@ -95,6 +102,13 @@ struct qt_meta_stringdata_CLASSWidgetENDCLASS_t {
     char stringdata23[3];
     char stringdata24[15];
     char stringdata25[14];
+    char stringdata26[13];
+    char stringdata27[16];
+    char stringdata28[9];
+    char stringdata29[14];
+    char stringdata30[10];
+    char stringdata31[8];
+    char stringdata32[11];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(sizeof(qt_meta_stringdata_CLASSWidgetENDCLASS_t::offsetsAndSizes) + ofs), len 
@@ -125,7 +139,14 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSWidgetENDCLASS_t qt_meta_string
         QT_MOC_LITERAL(185, 4),  // "from"
         QT_MOC_LITERAL(190, 2),  // "to"
         QT_MOC_LITERAL(193, 14),  // "readSerialData"
-        QT_MOC_LITERAL(208, 13)   // "setParameters"
+        QT_MOC_LITERAL(208, 13),  // "setParameters"
+        QT_MOC_LITERAL(222, 12),  // "setFrequency"
+        QT_MOC_LITERAL(235, 15),  // "setRatedPumping"
+        QT_MOC_LITERAL(251, 8),  // "setPhase"
+        QT_MOC_LITERAL(260, 13),  // "setMaxPumping"
+        QT_MOC_LITERAL(274, 9),  // "setFactor"
+        QT_MOC_LITERAL(284, 7),  // "setWarm"
+        QT_MOC_LITERAL(292, 10)   // "setCurrent"
     },
     "Widget",
     "clickedStartBlock",
@@ -152,7 +173,14 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSWidgetENDCLASS_t qt_meta_string
     "from",
     "to",
     "readSerialData",
-    "setParameters"
+    "setParameters",
+    "setFrequency",
+    "setRatedPumping",
+    "setPhase",
+    "setMaxPumping",
+    "setFactor",
+    "setWarm",
+    "setCurrent"
 };
 #undef QT_MOC_LITERAL
 #endif // !QT_MOC_HAS_STRING_DATA
@@ -164,7 +192,7 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSWidgetENDCLASS[] = {
       11,       // revision
        0,       // classname
        0,    0, // classinfo
-       8,   14, // methods
+      15,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -172,14 +200,21 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSWidgetENDCLASS[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,   62,    2, 0x08,    1 /* Private */,
-       3,    0,   63,    2, 0x08,    2 /* Private */,
-       4,    9,   64,    2, 0x08,    3 /* Private */,
-      15,    3,   83,    2, 0x08,   13 /* Private */,
-      15,    2,   90,    2, 0x28,   17 /* Private | MethodCloned */,
-      19,    3,   95,    2, 0x08,   20 /* Private */,
-      24,    0,  102,    2, 0x08,   24 /* Private */,
-      25,    0,  103,    2, 0x08,   25 /* Private */,
+       1,    0,  104,    2, 0x08,    1 /* Private */,
+       3,    0,  105,    2, 0x08,    2 /* Private */,
+       4,    9,  106,    2, 0x08,    3 /* Private */,
+      15,    3,  125,    2, 0x08,   13 /* Private */,
+      15,    2,  132,    2, 0x28,   17 /* Private | MethodCloned */,
+      19,    3,  137,    2, 0x08,   20 /* Private */,
+      24,    0,  144,    2, 0x08,   24 /* Private */,
+      25,    0,  145,    2, 0x08,   25 /* Private */,
+      26,    0,  146,    2, 0x08,   26 /* Private */,
+      27,    0,  147,    2, 0x08,   27 /* Private */,
+      28,    0,  148,    2, 0x08,   28 /* Private */,
+      29,    0,  149,    2, 0x08,   29 /* Private */,
+      30,    0,  150,    2, 0x08,   30 /* Private */,
+      31,    0,  151,    2, 0x08,   31 /* Private */,
+      32,    0,  152,    2, 0x08,   32 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
@@ -188,6 +223,13 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSWidgetENDCLASS[] = {
     QMetaType::Void, QMetaType::Float, QMetaType::Float, QMetaType::Float,   16,   17,   18,
     QMetaType::Void, QMetaType::Float, QMetaType::Float,   16,   17,
     0x80000000 | 20, 0x80000000 | 20, QMetaType::Int, QMetaType::Int,   21,   22,   23,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
 
@@ -235,6 +277,20 @@ Q_CONSTINIT const QMetaObject Widget::staticMetaObject = { {
         // method 'readSerialData'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'setParameters'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'setFrequency'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'setRatedPumping'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'setPhase'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'setMaxPumping'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'setFactor'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'setWarm'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'setCurrent'
         QtPrivate::TypeAndForceComplete<void, std::false_type>
     >,
     nullptr
@@ -255,6 +311,13 @@ void Widget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
             if (_a[0]) *reinterpret_cast< char**>(_a[0]) = std::move(_r); }  break;
         case 6: _t->readSerialData(); break;
         case 7: _t->setParameters(); break;
+        case 8: _t->setFrequency(); break;
+        case 9: _t->setRatedPumping(); break;
+        case 10: _t->setPhase(); break;
+        case 11: _t->setMaxPumping(); break;
+        case 12: _t->setFactor(); break;
+        case 13: _t->setWarm(); break;
+        case 14: _t->setCurrent(); break;
         default: ;
         }
     }
@@ -279,13 +342,13 @@ int Widget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 8)
+        if (_id < 15)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 8;
+        _id -= 15;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 8)
+        if (_id < 15)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 8;
+        _id -= 15;
     }
     return _id;
 }
