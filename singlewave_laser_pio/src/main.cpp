@@ -12,6 +12,7 @@
 //Конфигурация пинов
 #define pinD1 5
 #define pinD2 4
+#define pinD5 14 
 
 // Конфигурация модуля RS-485
 #define RS485_RX 13
@@ -75,23 +76,28 @@ void setup()
   Serial.begin(9600);
   myPort.begin(9600, SWSERIAL_8N2, RS485_RX, RS485_TX, false);
   mb.begin(&myPort);
+  pinMode(pinD5, OUTPUT);
+  pinMode(LED_BUILTIN,OUTPUT);
  }
 
 void loop() {
   // put your main code here, to run repeatedly:
-
   //readSerialData();
-  if (Serial.available()>0)
+  if (true)
   {
+    digitalWrite(pinD5, HIGH);
+    digitalWrite(LED_BUILTIN,HIGH);
+    mb.writeHreg(MODBUS_SLAVE_ID, BLOCK_REGISTR, BLOCK_UP, cb);
     flag = Serial.readString();
     flag.toCharArray(flagdata, flag.length() + 1);
     switch (flagdata[0])
     {
     case 'F':
-      setCurrent(flag);
+      //setCurrent(flag);
       break;
     case 'u':
-      upBlock();
+      delay(1000);
+      //upBlock();
       break;
     case 'd':
       downBlock();
@@ -99,6 +105,9 @@ void loop() {
     default:
       break;
     }
+    digitalWrite(pinD5, LOW);
+    digitalWrite(LED_BUILTIN, LOW);
+    delay(200);
   }
 }
 
