@@ -3,7 +3,7 @@
 
 bool flag;
 bool generated;
-QString portName = "COM4";
+QString portName = "COM9";
 QSerialPort serialPort;
 using namespace std;
 
@@ -21,10 +21,10 @@ Widget::Widget(QWidget *parent)
     phaseDurationLabel = new QLabel("Длительность накачки фазы, мкс:");
     phaseDurationEdit = new QLineEdit;
 
-    maxPumpingDurationLabel = new QLabel("Максимальная длительность накачки:");
+    maxPumpingDurationLabel = new QLabel("Напряжение:");
     maxPumpingDurationEdit = new QLineEdit;
     maxPumpingDurationEdit->setReadOnly(true);
-    maxPumpingDurationEdit->setText(QString::number(MaxPumpPassport));
+    maxPumpingDurationEdit->setText(QString::number(10));
 
     correctionFactorLabel = new QLabel("Поправочный коэффицент:");
     correctionFactorEdit = new QLineEdit;
@@ -35,7 +35,7 @@ Widget::Widget(QWidget *parent)
     pumpingCurrentLabel = new QLabel("Ток накачки, А:");
     pumpingCurrentEdit = new QLineEdit;
     pumpingCurrentEdit->setReadOnly(true);
-    pumpingCurrentEdit->setText(QString::number(Current));
+    pumpingCurrentEdit->setText(QString::number(10));
 
     startBlockButton = new QPushButton("Включение блока");
     generationBlockButton = new QPushButton("Начать генерацию");
@@ -430,7 +430,7 @@ void Widget::setPhase()
 
 void Widget::setMaxPumping()
 {
-      string fmess = "M";
+      string fmess = "V";
 
       if (maxPumpingDurationEdit->text() == "")
       {
@@ -501,7 +501,7 @@ void Widget::setWarm()
 
 void Widget::setCurrent()
 {
-      string fmess = "A";
+      string fmess = "I";
 
       if (pumpingCurrentEdit->text() == "")
       {

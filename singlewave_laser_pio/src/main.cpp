@@ -66,7 +66,8 @@ void downBlock();
 void upBlock();
 void generateBlock();
 void notgenerateBlock();
-void setCurrent(String);
+void setCurrent();
+void setVoltage();
 
 using namespace std;
 
@@ -83,11 +84,10 @@ void setup()
 void loop() {
   // put your main code here, to run repeatedly:
   //readSerialData();
-  if (true)
+  if (Serial.available()>0)
   {
     digitalWrite(pinD5, HIGH);
     digitalWrite(LED_BUILTIN,HIGH);
-    mb.writeHreg(MODBUS_SLAVE_ID, BLOCK_REGISTR, BLOCK_UP, cb);
     flag = Serial.readString();
     flag.toCharArray(flagdata, flag.length() + 1);
     switch (flagdata[0])
@@ -95,9 +95,14 @@ void loop() {
     case 'F':
       //setCurrent(flag);
       break;
+    case 'V':
+      setVoltage();
+      break;
+    case 'I':
+      setCurrent();
+      break;
     case 'u':
-      delay(1000);
-      //upBlock();
+      upBlock();
       break;
     case 'd':
       downBlock();
@@ -107,7 +112,6 @@ void loop() {
     }
     digitalWrite(pinD5, LOW);
     digitalWrite(LED_BUILTIN, LOW);
-    delay(200);
   }
 }
 
@@ -115,29 +119,27 @@ void loop() {
 
 void readSerialData()
 {
-  if (Serial.available()>0)
+  bool digit;
+  String data = Serial.readString(); // Чтение данных до символа новой строки
+  for (int i = 0; i < data.length(); i++)
   {
-    bool digit;
-    String data = Serial.readString(); // Чтение данных до символа новой строки
-    for (int i = 0; i < data.length(); i++) {
-          digit = isdigit(data[i]);
-          if(digit){
-            break;
-          }
-        }
-    if (digit){
-      data.toCharArray(buffer,28);
-      Serial.write(buffer);
-      PulseDuration=round(atoi(strtok(buffer," ")));
-      Period=round(stof(strtok(NULL," "))*10);
-      NumberOfPulses=atoi(strtok(NULL," "));
-      Serial.write("Done!");
-      Serial.println(PulseDuration);
-      Serial.println(Period);
-      Serial.println(NumberOfPulses);
-    
+    digit = isdigit(data[i]);
+    if (digit)
+    {
+      break;
     }
-     
+  }
+  if (digit)
+  {
+    data.toCharArray(buffer, 28);
+    Serial.write(buffer);
+    PulseDuration = round(atoi(strtok(buffer, " ")));
+    Period = round(stof(strtok(NULL, " ")) * 10);
+    NumberOfPulses = atoi(strtok(NULL, " "));
+    Serial.write("Done!");
+    Serial.println(PulseDuration);
+    Serial.println(Period);
+    Serial.println(NumberOfPulses);
   }
 }
 
@@ -149,10 +151,15 @@ void downBlock()
 {
   mb.writeHreg(MODBUS_SLAVE_ID,BLOCK_REGISTR,BLOCK_DOWN,cb);
 }
-void setCurrent(String str)
+
+void setCurrent()
 {
-  str.remove(0,1);
-  //mb.writeHreg(MODBUS_SLAVE_ID, FREQUENCY_REGISTR, BLOCK_FREQUENCY, cb);
+  mb.writeHreg(MODBUS_SLAVE_ID, CURRENT_REGISTR, BLOCK_CURRENT, cb);
+}
+
+void setVoltage()
+{
+mb.writeHreg(MODBUS_SLAVE_ID, VOLTAGE_REGISTR, BLOCK_VOLTAGE, cb);
 }
 
 void generateBlock()
