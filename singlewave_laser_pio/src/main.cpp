@@ -37,6 +37,14 @@
 #define BLOCK_VOLTAGE 100
 #define BLOCK_CURRENT 100
 
+// Настройка параметров
+#define MaxPumpPassport (130.0)
+#define correctionFactor (0.8)
+#define phaseDuration (30)
+#define nominalFrequency (20.0)
+#define preparatoryPulseDuration (70)
+#define ratedPumpingDuration (90)
+
 ModbusRTU mb;
 EspSoftwareSerial::UART myPort;
 
@@ -53,7 +61,7 @@ bool cb(Modbus::ResultCode event, uint16_t transactionId, void* data) {
 }
 
 const int numValues = 3;
-float PulseDuration,Period,NumberOfPulses;
+float Duration,Period,NumberOfWarmPulses;
 char buffer[28];
 char flagdata[50];
 bool toggleflag = 0;
@@ -68,6 +76,8 @@ void generateBlock();
 void notgenerateBlock();
 void setCurrent();
 void setVoltage();
+void Parameter_calculation(float t_n, float k, float t_fr, float F_n, float F_p, float t_prep, float &t_ef_temp, float &T_temp, float &N);
+
 
 using namespace std;
 
@@ -93,7 +103,12 @@ void loop() {
     switch (flagdata[0])
     {
     case 'F':
-      //setCurrent(flag);
+      memmove(&flagdata[0],&flagdata[1],49);
+      int generationFrequency = atoi(flagdata);
+      Parameter_calculation(ratedPumpingDuration, correctionFactor, phaseDuration,
+                            nominalFrequency, generationFrequency, preparatoryPulseDuration, 
+                            Duration, Period, NumberOfWarmPulses);
+
       break;
     case 'V':
       setVoltage();
@@ -117,7 +132,38 @@ void loop() {
 
 // put function definitions here:
 
-void readSerialData()
+void Parameter_calculation(float t_n, float k, float t_fr, float F_n, float F_p, float t_prep, float &t_ef_temp, float &T_temp, float &N)
+{
+      float P_n;
+      float P_p;
+      float t_p;
+      float t_ef;
+      float t_diod;
+      float t_temp;
+
+      P_n = (t_n + k * t_fr) * F_n;
+      t_p = (P_n/F_p) - k * t_fr;
+      if (t_p < MaxPumpPassport)
+      {
+        t_diod = t_p + t_fr;
+        flag = true;
+        t_ef_temp = t_diod;
+        T_temp = 1 / F_p;
+      }
+      else
+      {
+        P_p = (t_n + k * t_fr) * F_p;
+        t_ef = (P_n - P_p) / F_p;
+        N = ceil(t_ef / (t_prep + k * t_fr));
+        t_temp = t_ef / N - k * t_fr;
+        t_ef_temp = t_temp + t_fr;
+        T_temp = 1 / (F_p * (N + 1));
+        flag = false;
+      }
+}
+
+
+/*void readSerialData()
 {
   bool digit;
   String data = Serial.readString(); // Чтение данных до символа новой строки
@@ -142,7 +188,7 @@ void readSerialData()
     Serial.println(NumberOfPulses);
   }
 }
-
+*/
 void upBlock()
 {
   mb.writeHreg(MODBUS_SLAVE_ID,BLOCK_REGISTR,BLOCK_UP,cb);  
@@ -170,12 +216,6 @@ void generateBlock()
 void notgenerateBlock()
 {
   mb.writeHreg(MODBUS_SLAVE_ID,BLOCK_REGISTR,BLOCK_NOTGENERATE,cb);  
-}
-
-std::string intToHex(int value) {
-    std::stringstream stream;
-    stream << std::hex << value;
-    return stream.str();
 }
 
 void generation()
