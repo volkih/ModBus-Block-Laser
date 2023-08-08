@@ -26,15 +26,9 @@
 
 #define MaxFrequency (25.0)
 #define MinFrequency (0.0)
-#define MaxPumpDuration (200.0)
-#define MinPumpDuration (20.0)
-#define MaxCorrectionFactor (1.0)
-#define MinCorrectionFactor (0.0)
 
-#define MaxPumpPassport (130.0)
-#define NominalFrequency (20.0f)
-
-#define Current (41)
+#define Voltage (10.0)
+#define Current (10.0)
 #define demicalPlaces (1)
 #define MinBorder (0)
 
@@ -57,32 +51,19 @@ private:
         return value;
     }
     QLineEdit *generationEdit;
-    QLineEdit *ratedPumpingDurationEdit;
-    QLineEdit *phaseDurationEdit;
-    QLineEdit *maxPumpingDurationEdit;
-    QLineEdit *correctionFactorEdit;
-    QLineEdit *preparatoryPulseDurationEdit;
+    QLineEdit *VoltageEdit;
     QLineEdit *pumpingCurrentEdit;
 
     QPushButton *startBlockButton;
     QPushButton *generationBlockButton;
     QPushButton *SyncBlockButton;
-    QPushButton *setParametersButton;
 
     QPushButton *setFrequencyButton;
-    QPushButton *setRatedPumpingButton;
-    QPushButton *setPhaseButton;
-    QPushButton *setMaxPumpingButton;
-    QPushButton *setFactorButton;
-    QPushButton *setWarmButton;
+    QPushButton *setVoltageButton;
     QPushButton *setCurrentButton;
 
     QLabel *generationLabel;
-    QLabel *ratedPumpingDurationLabel;
-    QLabel *phaseDurationLabel;
-    QLabel *maxPumpingDurationLabel;
-    QLabel *correctionFactorLabel;
-    QLabel *preparatoryPulseDurationLabel;
+    QLabel *VoltageLabel;
     QLabel *pumpingCurrentLabel;
 
     QVBoxLayout *layout;
@@ -99,8 +80,6 @@ private:
 private slots:
     void clickedStartBlock();
     void clickedGenerateBlock();
-    void Parameter_calculation(float t_n, float k, float t_fr, float F_n, float F_p, float t_prep, float& t_ef_temp, float& T_temp, float& N);
-    void DataPort(float FinalDuration, float FinalPeriod, float NumberOfPulses = 0.0);
     char* slice(char*s, int from, int to)
     {
         /*
@@ -116,13 +95,8 @@ private slots:
         return s;
     }
     void readSerialData();
-    void setParameters();
     void setFrequency();
-    void setRatedPumping();
-    void setPhase();
-    void setMaxPumping();
-    void setFactor();
-    void setWarm();
+    void setVoltage();
     void setCurrent();
 };
 #endif // WIDGET_H

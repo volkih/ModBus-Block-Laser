@@ -61,7 +61,7 @@ bool cb(Modbus::ResultCode event, uint16_t transactionId, void* data) {
 }
 
 const int numValues = 3;
-float Duration,Period,NumberOfWarmPulses;
+float Duration,Period,NumberOfWarmPulses, generationFrequency;
 char buffer[28];
 char flagdata[50];
 bool toggleflag = 0;
@@ -76,7 +76,7 @@ void generateBlock();
 void notgenerateBlock();
 void setCurrent();
 void setVoltage();
-void Parameter_calculation(float t_n, float k, float t_fr, float F_n, float F_p, float t_prep, float &t_ef_temp, float &T_temp, float &N);
+void Parameter_calculation(float, float, float, float, float, float, float &, float &, float &);
 
 
 using namespace std;
@@ -104,11 +104,10 @@ void loop() {
     {
     case 'F':
       memmove(&flagdata[0],&flagdata[1],49);
-      int generationFrequency = atoi(flagdata);
+      generationFrequency = atof(flagdata) / 10;
       Parameter_calculation(ratedPumpingDuration, correctionFactor, phaseDuration,
                             nominalFrequency, generationFrequency, preparatoryPulseDuration, 
                             Duration, Period, NumberOfWarmPulses);
-
       break;
     case 'V':
       setVoltage();

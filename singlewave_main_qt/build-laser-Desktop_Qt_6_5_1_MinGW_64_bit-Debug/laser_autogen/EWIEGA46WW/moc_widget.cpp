@@ -43,72 +43,32 @@ static constexpr auto qt_meta_stringdata_CLASSWidgetENDCLASS = QtMocHelpers::str
     "clickedStartBlock",
     "",
     "clickedGenerateBlock",
-    "Parameter_calculation",
-    "t_n",
-    "k",
-    "t_fr",
-    "F_n",
-    "F_p",
-    "t_prep",
-    "float&",
-    "t_ef_temp",
-    "T_temp",
-    "N",
-    "DataPort",
-    "FinalDuration",
-    "FinalPeriod",
-    "NumberOfPulses",
     "slice",
     "char*",
     "s",
     "from",
     "to",
     "readSerialData",
-    "setParameters",
     "setFrequency",
-    "setRatedPumping",
-    "setPhase",
-    "setMaxPumping",
-    "setFactor",
-    "setWarm",
+    "setVoltage",
     "setCurrent"
 );
 #else  // !QT_MOC_HAS_STRING_DATA
 struct qt_meta_stringdata_CLASSWidgetENDCLASS_t {
-    uint offsetsAndSizes[66];
+    uint offsetsAndSizes[26];
     char stringdata0[7];
     char stringdata1[18];
     char stringdata2[1];
     char stringdata3[21];
-    char stringdata4[22];
-    char stringdata5[4];
+    char stringdata4[6];
+    char stringdata5[6];
     char stringdata6[2];
     char stringdata7[5];
-    char stringdata8[4];
-    char stringdata9[4];
-    char stringdata10[7];
-    char stringdata11[7];
-    char stringdata12[10];
-    char stringdata13[7];
-    char stringdata14[2];
-    char stringdata15[9];
-    char stringdata16[14];
-    char stringdata17[12];
-    char stringdata18[15];
-    char stringdata19[6];
-    char stringdata20[6];
-    char stringdata21[2];
-    char stringdata22[5];
-    char stringdata23[3];
-    char stringdata24[15];
-    char stringdata25[14];
-    char stringdata26[13];
-    char stringdata27[16];
-    char stringdata28[9];
-    char stringdata29[14];
-    char stringdata30[10];
-    char stringdata31[8];
-    char stringdata32[11];
+    char stringdata8[3];
+    char stringdata9[15];
+    char stringdata10[13];
+    char stringdata11[11];
+    char stringdata12[11];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(sizeof(qt_meta_stringdata_CLASSWidgetENDCLASS_t::offsetsAndSizes) + ofs), len 
@@ -118,68 +78,28 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSWidgetENDCLASS_t qt_meta_string
         QT_MOC_LITERAL(7, 17),  // "clickedStartBlock"
         QT_MOC_LITERAL(25, 0),  // ""
         QT_MOC_LITERAL(26, 20),  // "clickedGenerateBlock"
-        QT_MOC_LITERAL(47, 21),  // "Parameter_calculation"
-        QT_MOC_LITERAL(69, 3),  // "t_n"
-        QT_MOC_LITERAL(73, 1),  // "k"
-        QT_MOC_LITERAL(75, 4),  // "t_fr"
-        QT_MOC_LITERAL(80, 3),  // "F_n"
-        QT_MOC_LITERAL(84, 3),  // "F_p"
-        QT_MOC_LITERAL(88, 6),  // "t_prep"
-        QT_MOC_LITERAL(95, 6),  // "float&"
-        QT_MOC_LITERAL(102, 9),  // "t_ef_temp"
-        QT_MOC_LITERAL(112, 6),  // "T_temp"
-        QT_MOC_LITERAL(119, 1),  // "N"
-        QT_MOC_LITERAL(121, 8),  // "DataPort"
-        QT_MOC_LITERAL(130, 13),  // "FinalDuration"
-        QT_MOC_LITERAL(144, 11),  // "FinalPeriod"
-        QT_MOC_LITERAL(156, 14),  // "NumberOfPulses"
-        QT_MOC_LITERAL(171, 5),  // "slice"
-        QT_MOC_LITERAL(177, 5),  // "char*"
-        QT_MOC_LITERAL(183, 1),  // "s"
-        QT_MOC_LITERAL(185, 4),  // "from"
-        QT_MOC_LITERAL(190, 2),  // "to"
-        QT_MOC_LITERAL(193, 14),  // "readSerialData"
-        QT_MOC_LITERAL(208, 13),  // "setParameters"
-        QT_MOC_LITERAL(222, 12),  // "setFrequency"
-        QT_MOC_LITERAL(235, 15),  // "setRatedPumping"
-        QT_MOC_LITERAL(251, 8),  // "setPhase"
-        QT_MOC_LITERAL(260, 13),  // "setMaxPumping"
-        QT_MOC_LITERAL(274, 9),  // "setFactor"
-        QT_MOC_LITERAL(284, 7),  // "setWarm"
-        QT_MOC_LITERAL(292, 10)   // "setCurrent"
+        QT_MOC_LITERAL(47, 5),  // "slice"
+        QT_MOC_LITERAL(53, 5),  // "char*"
+        QT_MOC_LITERAL(59, 1),  // "s"
+        QT_MOC_LITERAL(61, 4),  // "from"
+        QT_MOC_LITERAL(66, 2),  // "to"
+        QT_MOC_LITERAL(69, 14),  // "readSerialData"
+        QT_MOC_LITERAL(84, 12),  // "setFrequency"
+        QT_MOC_LITERAL(97, 10),  // "setVoltage"
+        QT_MOC_LITERAL(108, 10)   // "setCurrent"
     },
     "Widget",
     "clickedStartBlock",
     "",
     "clickedGenerateBlock",
-    "Parameter_calculation",
-    "t_n",
-    "k",
-    "t_fr",
-    "F_n",
-    "F_p",
-    "t_prep",
-    "float&",
-    "t_ef_temp",
-    "T_temp",
-    "N",
-    "DataPort",
-    "FinalDuration",
-    "FinalPeriod",
-    "NumberOfPulses",
     "slice",
     "char*",
     "s",
     "from",
     "to",
     "readSerialData",
-    "setParameters",
     "setFrequency",
-    "setRatedPumping",
-    "setPhase",
-    "setMaxPumping",
-    "setFactor",
-    "setWarm",
+    "setVoltage",
     "setCurrent"
 };
 #undef QT_MOC_LITERAL
@@ -192,7 +112,7 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSWidgetENDCLASS[] = {
       11,       // revision
        0,       // classname
        0,    0, // classinfo
-      15,   14, // methods
+       7,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -200,34 +120,18 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSWidgetENDCLASS[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,  104,    2, 0x08,    1 /* Private */,
-       3,    0,  105,    2, 0x08,    2 /* Private */,
-       4,    9,  106,    2, 0x08,    3 /* Private */,
-      15,    3,  125,    2, 0x08,   13 /* Private */,
-      15,    2,  132,    2, 0x28,   17 /* Private | MethodCloned */,
-      19,    3,  137,    2, 0x08,   20 /* Private */,
-      24,    0,  144,    2, 0x08,   24 /* Private */,
-      25,    0,  145,    2, 0x08,   25 /* Private */,
-      26,    0,  146,    2, 0x08,   26 /* Private */,
-      27,    0,  147,    2, 0x08,   27 /* Private */,
-      28,    0,  148,    2, 0x08,   28 /* Private */,
-      29,    0,  149,    2, 0x08,   29 /* Private */,
-      30,    0,  150,    2, 0x08,   30 /* Private */,
-      31,    0,  151,    2, 0x08,   31 /* Private */,
-      32,    0,  152,    2, 0x08,   32 /* Private */,
+       1,    0,   56,    2, 0x08,    1 /* Private */,
+       3,    0,   57,    2, 0x08,    2 /* Private */,
+       4,    3,   58,    2, 0x08,    3 /* Private */,
+       9,    0,   65,    2, 0x08,    7 /* Private */,
+      10,    0,   66,    2, 0x08,    8 /* Private */,
+      11,    0,   67,    2, 0x08,    9 /* Private */,
+      12,    0,   68,    2, 0x08,   10 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Float, QMetaType::Float, QMetaType::Float, QMetaType::Float, QMetaType::Float, QMetaType::Float, 0x80000000 | 11, 0x80000000 | 11, 0x80000000 | 11,    5,    6,    7,    8,    9,   10,   12,   13,   14,
-    QMetaType::Void, QMetaType::Float, QMetaType::Float, QMetaType::Float,   16,   17,   18,
-    QMetaType::Void, QMetaType::Float, QMetaType::Float,   16,   17,
-    0x80000000 | 20, 0x80000000 | 20, QMetaType::Int, QMetaType::Int,   21,   22,   23,
-    QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void,
+    0x80000000 | 5, 0x80000000 | 5, QMetaType::Int, QMetaType::Int,    6,    7,    8,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -249,26 +153,6 @@ Q_CONSTINIT const QMetaObject Widget::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'clickedGenerateBlock'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'Parameter_calculation'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        QtPrivate::TypeAndForceComplete<float, std::false_type>,
-        QtPrivate::TypeAndForceComplete<float, std::false_type>,
-        QtPrivate::TypeAndForceComplete<float, std::false_type>,
-        QtPrivate::TypeAndForceComplete<float, std::false_type>,
-        QtPrivate::TypeAndForceComplete<float, std::false_type>,
-        QtPrivate::TypeAndForceComplete<float, std::false_type>,
-        QtPrivate::TypeAndForceComplete<float &, std::false_type>,
-        QtPrivate::TypeAndForceComplete<float &, std::false_type>,
-        QtPrivate::TypeAndForceComplete<float &, std::false_type>,
-        // method 'DataPort'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        QtPrivate::TypeAndForceComplete<float, std::false_type>,
-        QtPrivate::TypeAndForceComplete<float, std::false_type>,
-        QtPrivate::TypeAndForceComplete<float, std::false_type>,
-        // method 'DataPort'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        QtPrivate::TypeAndForceComplete<float, std::false_type>,
-        QtPrivate::TypeAndForceComplete<float, std::false_type>,
         // method 'slice'
         QtPrivate::TypeAndForceComplete<char *, std::false_type>,
         QtPrivate::TypeAndForceComplete<char *, std::false_type>,
@@ -276,19 +160,9 @@ Q_CONSTINIT const QMetaObject Widget::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<int, std::false_type>,
         // method 'readSerialData'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'setParameters'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'setFrequency'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'setRatedPumping'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'setPhase'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'setMaxPumping'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'setFactor'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'setWarm'
+        // method 'setVoltage'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'setCurrent'
         QtPrivate::TypeAndForceComplete<void, std::false_type>
@@ -304,20 +178,12 @@ void Widget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
         switch (_id) {
         case 0: _t->clickedStartBlock(); break;
         case 1: _t->clickedGenerateBlock(); break;
-        case 2: _t->Parameter_calculation((*reinterpret_cast< std::add_pointer_t<float>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<float>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<float>>(_a[3])),(*reinterpret_cast< std::add_pointer_t<float>>(_a[4])),(*reinterpret_cast< std::add_pointer_t<float>>(_a[5])),(*reinterpret_cast< std::add_pointer_t<float>>(_a[6])),(*reinterpret_cast< std::add_pointer_t<float&>>(_a[7])),(*reinterpret_cast< std::add_pointer_t<float&>>(_a[8])),(*reinterpret_cast< std::add_pointer_t<float&>>(_a[9]))); break;
-        case 3: _t->DataPort((*reinterpret_cast< std::add_pointer_t<float>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<float>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<float>>(_a[3]))); break;
-        case 4: _t->DataPort((*reinterpret_cast< std::add_pointer_t<float>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<float>>(_a[2]))); break;
-        case 5: { char* _r = _t->slice((*reinterpret_cast< std::add_pointer_t<char*>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[3])));
+        case 2: { char* _r = _t->slice((*reinterpret_cast< std::add_pointer_t<char*>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[3])));
             if (_a[0]) *reinterpret_cast< char**>(_a[0]) = std::move(_r); }  break;
-        case 6: _t->readSerialData(); break;
-        case 7: _t->setParameters(); break;
-        case 8: _t->setFrequency(); break;
-        case 9: _t->setRatedPumping(); break;
-        case 10: _t->setPhase(); break;
-        case 11: _t->setMaxPumping(); break;
-        case 12: _t->setFactor(); break;
-        case 13: _t->setWarm(); break;
-        case 14: _t->setCurrent(); break;
+        case 3: _t->readSerialData(); break;
+        case 4: _t->setFrequency(); break;
+        case 5: _t->setVoltage(); break;
+        case 6: _t->setCurrent(); break;
         default: ;
         }
     }
@@ -342,13 +208,13 @@ int Widget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 15)
+        if (_id < 7)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 15;
+        _id -= 7;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 15)
+        if (_id < 7)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 15;
+        _id -= 7;
     }
     return _id;
 }
