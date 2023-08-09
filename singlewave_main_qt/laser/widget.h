@@ -19,6 +19,7 @@
 #include <QTimer>
 #include <QMessageBox>
 #include <QSettings>
+#include <QDateTime>
 
 #include <iostream>
 #include <stdexcept>
@@ -66,6 +67,8 @@ private:
     QLabel *VoltageLabel;
     QLabel *pumpingCurrentLabel;
 
+    QDateTime currentDateTime;
+
     QVBoxLayout *layout;
     QHBoxLayout *layout_H;
     QHBoxLayout *layout_main;
@@ -94,9 +97,10 @@ private slots:
         s[j] = 0;
         return s;
     }
-    void readSerialData();
     void setFrequency();
     void setVoltage();
     void setCurrent();
+    void readSerialData(QString t);
+    void setTime(QString &t);
 };
 #endif // WIDGET_H

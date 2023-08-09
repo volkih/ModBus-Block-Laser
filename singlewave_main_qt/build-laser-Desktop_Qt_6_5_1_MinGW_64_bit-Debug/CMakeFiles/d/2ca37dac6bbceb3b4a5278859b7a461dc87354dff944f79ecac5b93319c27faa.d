@@ -8,6 +8,7 @@ laser_autogen/timestamp: \
   D:/GitHub/ModBus-Block-Laser/singlewave_main_qt/laser/main.cpp \
   D:/GitHub/ModBus-Block-Laser/singlewave_main_qt/laser/widget.cpp \
   D:/GitHub/ModBus-Block-Laser/singlewave_main_qt/laser/widget.h \
+  D:/Programs/Qt/6.5.1/mingw_64/include/QtCore/QDateTime \
   D:/Programs/Qt/6.5.1/mingw_64/include/QtCore/QDeadlineTimer \
   D:/Programs/Qt/6.5.1/mingw_64/include/QtCore/QDebug \
   D:/Programs/Qt/6.5.1/mingw_64/include/QtCore/QHash \

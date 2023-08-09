@@ -3,6 +3,7 @@ D:/GitHub/ModBus-Block-Laser/singlewave_main_qt/laser/widget.h
  mmc:Q_OBJECT
  mdp:D:/GitHub/ModBus-Block-Laser/singlewave_main_qt/laser/widget.h
  mdp:D:/GitHub/ModBus-Block-Laser/singlewave_main_qt/build-laser-Desktop_Qt_6_5_1_MinGW_64_bit-Debug/laser_autogen/moc_predefs.h
+ mdp:D:/Programs/Qt/6.5.1/mingw_64/include/QtCore/QDateTime
  mdp:D:/Programs/Qt/6.5.1/mingw_64/include/QtCore/QDeadlineTimer
  mdp:D:/Programs/Qt/6.5.1/mingw_64/include/QtCore/QDebug
  mdp:D:/Programs/Qt/6.5.1/mingw_64/include/QtCore/QHash

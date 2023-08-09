@@ -63,10 +63,12 @@ bool cb(Modbus::ResultCode event, uint16_t transactionId, void* data) {
 const int numValues = 3;
 float Duration,Period,NumberOfWarmPulses, generationFrequency;
 char buffer[28];
+char values[50];
 char flagdata[50];
 bool toggleflag = 0;
 char commandChar[1];
 String flag = "";
+String mess = "";
 // put function declarations here:
 void readSerialData();
 void upBlock();
@@ -108,6 +110,10 @@ void loop() {
       Parameter_calculation(ratedPumpingDuration, correctionFactor, phaseDuration,
                             nominalFrequency, generationFrequency, preparatoryPulseDuration, 
                             Duration, Period, NumberOfWarmPulses);
+      mess = String(Duration) + " " + String(Period*100) + " " + String(NumberOfWarmPulses);
+      mess.toCharArray(values,50);
+      Serial.write(values);
+      
       break;
     case 'V':
       setVoltage();

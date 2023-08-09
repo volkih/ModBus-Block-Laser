@@ -1,5 +1,6 @@
 D:/GitHub/ModBus-Block-Laser/singlewave_main_qt/build-laser-Desktop_Qt_6_5_1_MinGW_64_bit-Debug/laser_autogen/EWIEGA46WW/moc_widget.cpp: D:/GitHub/ModBus-Block-Laser/singlewave_main_qt/laser/widget.h \
   D:/GitHub/ModBus-Block-Laser/singlewave_main_qt/build-laser-Desktop_Qt_6_5_1_MinGW_64_bit-Debug/laser_autogen/moc_predefs.h \
+  D:/Programs/Qt/6.5.1/mingw_64/include/QtCore/QDateTime \
   D:/Programs/Qt/6.5.1/mingw_64/include/QtCore/QDeadlineTimer \
   D:/Programs/Qt/6.5.1/mingw_64/include/QtCore/QDebug \
   D:/Programs/Qt/6.5.1/mingw_64/include/QtCore/QHash \

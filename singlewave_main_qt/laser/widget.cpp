@@ -3,7 +3,7 @@
 
 bool flag;
 bool generated;
-QString portName = "COM9";
+QString portName = "COM4";
 QSerialPort serialPort;
 using namespace std;
 
@@ -143,7 +143,7 @@ void Widget::clickedStartBlock()
             startBlockButton->setStyleSheet("background-color: #0af20a");
             startBlockButton->setText("Выключение блока");
 
-            readSerialData();
+            //readSerialData();
         }
         else{
 
@@ -154,7 +154,7 @@ void Widget::clickedStartBlock()
             startBlockButton->setStyleSheet("background-color: #f2190a");
             startBlockButton->setText("Включение блока");
 
-            readSerialData();
+            //readSerialData();
         }
     }else{
         QMessageBox::warning(this,"Error","Port is not open!");
@@ -167,6 +167,7 @@ void Widget::clickedGenerateBlock()
     float Duration;
     float Period;
     float NumberOfWarmPulses;
+    QString time;
 
     if(serialPort->isOpen()){
         if(generationBlockButton->text() == "Начать генерацию")
@@ -175,8 +176,9 @@ void Widget::clickedGenerateBlock()
             generationBlockButton->setText("Закончить генерацию");
 
             serialPort->write("startGenerate");
+            setTime(time);
             serialPort->waitForBytesWritten(-1);
-            readSerialData();
+            readSerialData(time);
         }
         else
         {
@@ -186,7 +188,7 @@ void Widget::clickedGenerateBlock()
             serialPort->write("stopGenerate");
             serialPort->waitForBytesWritten(-1);
 
-            readSerialData();
+            readSerialData(time);
         }
     }
     else{
@@ -198,21 +200,31 @@ void Widget::clickedGenerateBlock()
 
 
 
-void Widget::readSerialData()
+void Widget::readSerialData(QString time)
 {
-      if(serialPort->isOpen()){
+    if(serialPort->isOpen()){
         // Получаем данные через последовательный порт
-        QByteArray data = serialPort->readAll();
-        Logger->append(data);
+        if (serialPort->waitForReadyRead(-1))
+        {
+            QByteArray data = serialPort->readAll();
+            Logger->append(time + " " + data);
+        }
       }
       else{
         QMessageBox::warning(this,"Error","Port is not open!");
       }
 }
 
+void Widget::setTime(QString &formattedDateTime)
+{
+      currentDateTime = QDateTime::currentDateTime();
+      formattedDateTime = currentDateTime.toString("hh:mm:ss");
+}
+
 
 void Widget::setFrequency()
 {
+      QString time;
       try{
         float generationFrequency = validateInput<float>(generationEdit);
       }
@@ -233,7 +245,6 @@ void Widget::setFrequency()
         qDebug() << genInt;
         string mess = to_string(genInt);
         fmess.append(mess);
-        fmess.append("X");
 
         char chars[fmess.size()];
         fmess.copy(chars,fmess.size());
@@ -241,8 +252,9 @@ void Widget::setFrequency()
         qDebug() << chars;
 
         serialPort->write(chars);
+        setTime(time);
         serialPort->waitForBytesWritten(-1);
-
+        readSerialData(time);
       }
 }
 
